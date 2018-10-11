@@ -1,5 +1,6 @@
 package com.example;
 
+import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.camel.Exchange;
@@ -26,9 +27,12 @@ public class MySpringBootRouter extends RouteBuilder {
     	
     	restConfiguration().component("netty4-http").port(8880).bindingMode(RestBindingMode.json);
     	
-    	rest("/greetinig").get()
+    	rest("greeting").get()
 			.outType(Greeting.class)
 			.to("direct:greeting");
+    	
+    	rest("actuator/health").get()
+    		.to("direct:health");
     	
     	from("direct:greeting")
 		.process(new Processor() {
@@ -38,6 +42,14 @@ public class MySpringBootRouter extends RouteBuilder {
 				
 				exchange.getIn().setBody(new Greeting(counter.incrementAndGet(),
                         String.format(template, name)));
+			}
+		});
+    	
+    	from("direct:health")
+    	.process(new Processor() {
+			
+			public void process(Exchange exchange) throws Exception {
+				exchange.getIn().setBody(new HashMap());
 			}
 		});
     	
