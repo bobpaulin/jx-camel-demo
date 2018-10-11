@@ -59,6 +59,7 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
+    
 
     <!-- Camel -->
     <dependency>
@@ -68,6 +69,11 @@
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-stream-starter</artifactId>
+    </dependency>
+    
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-netty4-http-starter</artifactId>
     </dependency>
 
     <!-- Test -->
