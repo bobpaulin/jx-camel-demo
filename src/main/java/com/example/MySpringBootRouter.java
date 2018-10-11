@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.camel.Exchange;
@@ -49,7 +50,10 @@ public class MySpringBootRouter extends RouteBuilder {
     	.process(new Processor() {
 			
 			public void process(Exchange exchange) throws Exception {
-				exchange.getIn().setBody(new HashMap());
+				
+				Map<String, String> status = new HashMap<>();
+				status.put("status", "UP");
+				exchange.getIn().setBody(status);
 			}
 		});
     	
